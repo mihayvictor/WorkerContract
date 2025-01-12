@@ -5,47 +5,49 @@ import org.example.entities.HourContract;
 import org.example.entities.Worker;
 import org.example.entities.enums.WorkerLevel;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+        Locale.setDefault(Locale.US);
         Scanner input = new Scanner(System.in);
-        DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        Worker worker = new Worker();
-        Department department = new Department();
-        HourContract horacontract = new HourContract();
+        SimpleDateFormat sdf = new SimpleDateFormat("(dd/MM/yyyy)");
 
         System.out.print("Enter department's name: ");
-        department.setName(input.nextLine());
+        String departament =input.nextLine();
         System.out.print("Name: ");
-        worker.setName(input.nextLine());
+        String workerName = input.nextLine();
         System.out.print("Level: ");
-        worker.setLevel(WorkerLevel.valueOf(input.nextLine()));
+        String workerLevel = input.nextLine();
         System.out.print("Base Salary: ");
-        worker.setBaseSalary(input.nextDouble());
+        double baseSalary = input.nextDouble();
+        Worker worker = new Worker(new Department(departament), workerName, WorkerLevel.valueOf(workerLevel), baseSalary);
         System.out.print(" How many contracts to this worker? ");
         input.nextLine();
-        worker.setContract(input.nextInt());
-        input.nextLine();
+        int n =input.nextInt();
 
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
-        TimeZone timeZone = TimeZone.getTimeZone("UTC-3:00");
-        sdf.setTimeZone(timeZone);
-        for (int i = 0; i < worker.getContract(); i++){
+        for (int i = 0; i < n; i++){
             String stringDate;
-            System.out.println("Date: ");
-            stringDate = input.nextLine();
-
-
+            System.out.print("#" + i +"Date: ");
+            System.out.print("Date (DD/MM/YYYY): ");
+            Date contractDate = sdf.parse(input.next());
+            System.out.print("Value Per Hour: ");
+            double valuePerHour = input.nextDouble();
+            input.nextLine();
+            System.out.println("Duration (hours): ");
+            int hours = input.nextInt();
+            HourContract contract = new HourContract(contractDate, valuePerHour, hours);
+            worker.addcontract(contract);
         }
 
+        System.out.println();
+        System.out.print("Enter month and year to calculate income (MM/YYYY)");                                                                                        :
 
 
-        System.out.println(worker);
-        System.out.println(date);
 
+        input.close();
     }
 }
