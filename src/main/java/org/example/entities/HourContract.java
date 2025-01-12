@@ -1,18 +1,18 @@
-package org.example;
+package org.example.entities;
 
 import java.util.Date;
 
 public class HourContract {
     private Date date;
-    private  Double valuePerhour;
+    private  Double valuePerHour;
     private Integer hours;
 
     public HourContract() {
     }
 
-    public HourContract(Date date, Double valuePerhour, Integer hours) {
+    public HourContract(Date date, Double valuePerHour, Integer hours) {
         this.date = date;
-        this.valuePerhour = valuePerhour;
+        this.valuePerHour = valuePerHour;
         this.hours = hours;
     }
 
@@ -25,11 +25,11 @@ public class HourContract {
     }
 
     public Double getValuePerhour() {
-        return valuePerhour;
+        return valuePerHour;
     }
 
     public void setValuePerhour(Double valuePerhour) {
-        this.valuePerhour = valuePerhour;
+        this.valuePerHour = valuePerHour;
     }
 
     public Integer getHours() {
@@ -41,6 +41,6 @@ public class HourContract {
     }
 
     public Double totalValue(){
-        return hours * valuePerhour;
+        return hours * valuePerHour;
     }
 }

@@ -1,11 +1,13 @@
 package org.example;
 
-import java.time.LocalDate;
+import org.example.entities.Department;
+import org.example.entities.HourContract;
+import org.example.entities.Worker;
+import org.example.entities.enums.WorkerLevel;
+
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,30 +17,35 @@ public class Main {
         Department department = new Department();
         HourContract horacontract = new HourContract();
 
-        System.out.println("Enter department's name: ");
+        System.out.print("Enter department's name: ");
         department.setName(input.nextLine());
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         worker.setName(input.nextLine());
-        System.out.println("Level: ");
+        System.out.print("Level: ");
         worker.setLevel(WorkerLevel.valueOf(input.nextLine()));
-        System.out.println("Base Salary: ");
+        System.out.print("Base Salary: ");
         worker.setBaseSalary(input.nextDouble());
         System.out.print(" How many contracts to this worker? ");
         input.nextLine();
         worker.setContract(input.nextInt());
         input.nextLine();
 
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
+        TimeZone timeZone = TimeZone.getTimeZone("UTC-3:00");
+        sdf.setTimeZone(timeZone);
         for (int i = 0; i < worker.getContract(); i++){
-
-
-
+            String stringDate;
+            System.out.println("Date: ");
+            stringDate = input.nextLine();
 
 
         }
 
 
-        System.out.println(worker);
 
+        System.out.println(worker);
+        System.out.println(date);
 
     }
 }
