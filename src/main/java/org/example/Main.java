@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         Locale.setDefault(Locale.US);
         Scanner input = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("(dd/MM/yyyy)");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         System.out.print("Enter department's name: ");
         String departament =input.nextLine();
@@ -28,8 +28,9 @@ public class Main {
         System.out.print(" How many contracts to this worker? ");
         input.nextLine();
         int n =input.nextInt();
+        input.nextLine();
 
-        for (int i = 0; i < n; i++){
+        for (int i = 1; i <= n; i++){
             String stringDate;
             System.out.print("#" + i +"Date: ");
             System.out.print("Date (DD/MM/YYYY): ");
@@ -37,17 +38,20 @@ public class Main {
             System.out.print("Value Per Hour: ");
             double valuePerHour = input.nextDouble();
             input.nextLine();
-            System.out.println("Duration (hours): ");
+            System.out.print("Duration (hours): ");
             int hours = input.nextInt();
             HourContract contract = new HourContract(contractDate, valuePerHour, hours);
             worker.addcontract(contract);
         }
 
         System.out.println();
-        System.out.print("Enter month and year to calculate income (MM/YYYY)");                                                                                        :
-
-
-
+        System.out.print("Enter month and year to calculate income (MM/YYYY): ");
+        String monthAndYear = input.next();
+        int month = Integer.parseInt(monthAndYear.substring(0,2));
+        int year = Integer.parseInt(monthAndYear.substring(3));
+        System.out.println("Name: " + worker.getName());
+        System.out.println("Departament: " + worker.getDepartment().getName());
+        System.out.println("Income for " + monthAndYear + ": " + String.format("%.2f", worker.income(year,month)));
         input.close();
     }
 }
